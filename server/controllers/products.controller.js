@@ -12,6 +12,7 @@ module.exports.findOneSingleProduct = (req, res) => {
 		.catch(err => res.json({ message: "Something went wrong", error: err }));
 };
 
+
 module.exports.createNewProduct = (req, res) => {
     Product.create(req.body)
     .then(newlyCreatedProduct => res.json({ results: newlyCreatedProduct }))
@@ -19,7 +20,7 @@ module.exports.createNewProduct = (req, res) => {
 };
 
 module.exports.updateExistingProduct = (req, res) => {
-    Product.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true })
+    Product.findOneAndUpdate({ _id: req.params._id }, req.body, {runValidators: true})
     .then(updatedProduct => res.json({ result: updatedProduct }))
     .catch(err => res.json({ message: "Something went wrong", error: err }));
 };
